@@ -101,5 +101,14 @@ namespace ZTn.Json.JsonTreeView
                 streamWriter.Write(jTokenValue.ToString());
             }
         }
+        public void  Save (out string json)
+        {
+            json = null;
+            if (jTokenValue == null)
+            {
+                return;
+            }
+            json = jTokenValue.ToString();
+        }
     }
 }

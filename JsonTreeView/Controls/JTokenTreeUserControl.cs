@@ -63,16 +63,17 @@ namespace ZTn.Json.JsonTreeView.Controls
         /// Saves the content of the view in a json stream.
         /// </summary>
         /// <param name="stream"></param>
-        public void SaveJson(Stream stream)
+        public void GetJson(Stream stream)
         {
             JsonEditorItem.Save(stream);
         }
+        public void GetJson(out string str) => JsonEditorItem.Save(out str);
 
         /// <summary>
         /// Sets the stream from which to get the json string to show.
         /// </summary>
         /// <param name="stream"></param>
-        public void SetJsonSource(Stream stream)
+        public void SetJson(Stream stream)
         {
             if (stream == null)
             {
@@ -100,15 +101,19 @@ namespace ZTn.Json.JsonTreeView.Controls
         /// Sets the json string to show.
         /// </summary>
         /// <param name="jsonString"></param>
-        public void SetJsonSource(string jsonString)
+        public void SetJson(string jsonString)
         {
             var jsonEditorItem = new JTokenRoot(jsonString);
 
             jsonTreeView.Nodes.Clear();
-            jsonTreeView.Nodes.Add(JsonTreeNodeFactory.Create(jsonEditorItem.JTokenValue));
-            jsonTreeView.Nodes
-                .Cast<TreeNode>()
-                .ForEach(n => n.Expand());
+            if (jsonEditorItem != null && jsonEditorItem.JTokenValue != null && jsonEditorItem.JTokenValue.HasValues)
+            {
+                jsonTreeView.Nodes.Add(JsonTreeNodeFactory.Create(jsonEditorItem.JTokenValue));
+                jsonTreeView.Nodes
+                    .Cast<TreeNode>()
+                    .ForEach(n => n.Expand());
+            }
+
         }
 
         /// <summary>

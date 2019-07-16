@@ -42,6 +42,31 @@ namespace ZTn.Json.Editor.Forms
             get { return guiStatusStrip.Visible; }
             set { guiStatusStrip.Visible = value; }
         }
+        string _Json = null;
+        [DefaultValue(null)]
+        public string Json
+        {
+            get
+            {
+                if (jTokenTree != null && jTokenTree.IsHandleCreated && !jTokenTree.IsDisposed && !this.DesignMode)
+                {
+                    jTokenTree.GetJson(out _Json);
+                }
+                return _Json;
+            }
+            set
+            {
+                _Json = value;
+                if (jTokenTree != null && jTokenTree.IsHandleCreated && !jTokenTree.IsDisposed && !this.DesignMode)
+                {
+                    var objx = JsonConvert.DeserializeObject(_Json);
+                    if (objx != null)
+                    {
+                        jTokenTree.SetJson(_Json);
+                    }
+                }
+            }
+        }
         /// <summary>
         /// Accessor to file name of opened file.
         /// </summary>
@@ -142,7 +167,7 @@ namespace ZTn.Json.Editor.Forms
             {
                 using (var stream = new FileStream(OpenedFileName, FileMode.Open))
                 {
-                    jTokenTree.SaveJson(stream);
+                    jTokenTree.GetJson(stream);
                 }
             }
             catch
@@ -179,7 +204,7 @@ namespace ZTn.Json.Editor.Forms
                 {
                     if (stream.CanWrite)
                     {
-                        jTokenTree.SaveJson(stream);
+                        jTokenTree.GetJson(stream);
                     }
                 }
             }
@@ -198,14 +223,14 @@ namespace ZTn.Json.Editor.Forms
 
         private void newJsonObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            jTokenTree.SetJsonSource("{}");
+            jTokenTree.SetJson("{}");
 
             saveAsToolStripMenuItem.Enabled = true;
         }
 
         private void newJsonArrayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            jTokenTree.SetJsonSource("[]");
+            jTokenTree.SetJson("[]");
 
             saveAsToolStripMenuItem.Enabled = true;
         }
@@ -254,7 +279,7 @@ namespace ZTn.Json.Editor.Forms
 
             try
             {
-                jTokenTree.SetJsonSource(stream);
+                jTokenTree.SetJson(stream);
             }
             catch
             {
