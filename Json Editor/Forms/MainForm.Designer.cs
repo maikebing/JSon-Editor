@@ -35,16 +35,18 @@
             // 
             this.jsonEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.jsonEditorControl1.Location = new System.Drawing.Point(0, 0);
+            this.jsonEditorControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.jsonEditorControl1.Name = "jsonEditorControl1";
-            this.jsonEditorControl1.Size = new System.Drawing.Size(911, 567);
+            this.jsonEditorControl1.Size = new System.Drawing.Size(1172, 699);
             this.jsonEditorControl1.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 567);
+            this.ClientSize = new System.Drawing.Size(1172, 699);
             this.Controls.Add(this.jsonEditorControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);

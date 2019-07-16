@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace ZTn.Json.Editor.Forms
 {
@@ -29,7 +30,18 @@ namespace ZTn.Json.Editor.Forms
         #endregion
 
         #region >> Properties
-
+        [DefaultValue(true)]
+        public bool MenuBarVisible
+        {
+            get { return formMenuStrip.Visible; }
+            set { formMenuStrip.Visible = value; }
+        }
+        [DefaultValue(true)]
+        public bool StatusBarVisible
+        {
+            get { return guiStatusStrip.Visible; }
+            set { guiStatusStrip.Visible = value; }
+        }
         /// <summary>
         /// Accessor to file name of opened file.
         /// </summary>
